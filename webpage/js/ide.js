@@ -175,7 +175,7 @@ function loadMessages() {
         },
         success: function (data, textStatus, jqXHR) {
             messagesData = data;
-            showMessages();
+            //showMessages();
         }
     });
 }
@@ -512,7 +512,7 @@ function updateScreenElements() {
 $(window).resize(function() {
     layout.updateSize();
     updateScreenElements();
-    showMessages();
+    //showMessages();
 });
 
 $(document).ready(function () {
@@ -719,7 +719,7 @@ $(document).ready(function () {
         });
 
         layout.on("initialised", function () {
-            $(".monaco-editor")[0].appendChild($("#editor-status-line")[0]);
+           // $(".monaco-editor")[0].appendChild($("#editor-status-line")[0]);
             if (getIdFromURI()) {
                 loadSavedSource();
             } else {
