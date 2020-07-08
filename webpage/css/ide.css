@@ -6,11 +6,7 @@ html, body {
 }
 
 body {
-    background: url(/images/judge0_background.png) no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    background-color: #1e1e1e;
 }
 
 .ui[class*="left action"].input>.dropdown {
@@ -74,12 +70,6 @@ body {
     font-weight: bold;
 }
 
-#site-icon {
-    width: 30px;
-    height: 30px;
-    vertical-align: middle;
-}
-
 #site-header {
     padding-left: 0;
     padding-top: 0;
@@ -100,8 +90,8 @@ body {
     color: #db2828;
 }
 
-#site-footer, #status-line, #donate-line {
-    background-color: #0E6EB8;
+#site-footer, #status-line {
+    background-color: #1e1e1e;
     bottom: 0;
     font-family: "Droid Sans Mono", monospace, monospace, "Droid Sans Fallback";
     font-size: 13px;
@@ -112,7 +102,7 @@ body {
 }
 
 #site-footer {
-    color: #41a5f1;
+    color: white;
     left: 0;
     text-align: center;
     width: 100%;
@@ -125,13 +115,6 @@ body {
 
 #site-footer a:hover {
     color: #a0d2f8;
-}
-
-#donate-line {
-    float: left;
-    left: 0;
-    text-align: left;
-    width: fit-content;
 }
 
 #status-line {

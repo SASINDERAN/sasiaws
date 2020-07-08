@@ -256,44 +256,6 @@ function getIdFromURI() {
   return uri.split("&")[0];
 }
 
-function save() {
-    var content = JSON.stringify({
-        source_code: encode(sourceEditor.getValue()),
-        language_id: $selectLanguage.val(),
-        compiler_options: $compilerOptions.val(),
-        command_line_arguments: $commandLineArguments.val(),
-        stdin: encode(stdinEditor.getValue()),
-        stdout: encode(stdoutEditor.getValue()),
-        stderr: encode(stderrEditor.getValue()),
-        compile_output: encode(compileOutputEditor.getValue()),
-        sandbox_message: encode(sandboxMessageEditor.getValue()),
-        status_line: encode($statusLine.html())
-    });
-    var filename = "judge0-ide.json";
-    var data = {
-        content: content,
-        filename: filename
-    };
-
-    $.ajax({
-        url: pbUrl,
-        type: "POST",
-        async: true,
-        headers: {
-            "Accept": "application/json"
-        },
-        data: data,
-        success: function (data, textStatus, jqXHR) {
-            if (getIdFromURI() != data["short"]) {
-                window.history.replaceState(null, null, location.origin + location.pathname + "?" + data["short"]);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            handleError(jqXHR, textStatus, errorThrown);
-        }
-    });
-}
-
 function downloadSource() {
     var value = parseInt($selectLanguage.val());
     download(sourceEditor.getValue(), fileNames[value], "text/plain");
@@ -556,8 +518,6 @@ $(window).resize(function() {
 $(document).ready(function () {
     updateScreenElements();
 
-    console.log("Hey, Judge0 IDE is open-sourced: https://github.com/judge0/ide. Have fun!");
-
     $selectLanguage = $("#select-language");
     $selectLanguage.change(function (e) {
         if (!isEditorDirty) {
@@ -610,24 +570,11 @@ $(document).ready(function () {
         if (keyCode == 120) { // F9
             e.preventDefault();
             run();
-        } else if (keyCode == 119) { // F8
-            e.preventDefault();
-            var url = prompt("Enter URL of Judge0 API:", apiUrl);
-            if (url != null) {
-                url = url.trim();
-            }
-            if (url != null && url != "") {
-                apiUrl = url;
-                localStorageSetItem("api-url", apiUrl);
-            }
         } else if (keyCode == 118) { // F7
             e.preventDefault();
             wait = !wait;
             localStorageSetItem("wait", wait);
             alert(`Submission wait is ${wait ? "ON. Enjoy" : "OFF"}.`);
-        } else if (event.ctrlKey && keyCode == 83) { // Ctrl+S
-            e.preventDefault();
-            save();
         } else if (event.ctrlKey && keyCode == 107) { // Ctrl++
             e.preventDefault();
             fontSize += 1;
@@ -869,7 +816,7 @@ main(_) ->\n\
 ";
 
 var executableSource = "\
-Judge0 IDE assumes that content of executable is Base64 encoded.\n\
+Sasi IDE assumes that content of executable is Base64 encoded.\n\
 \n\
 This means that you should Base64 encode content of your binary,\n\
 paste it here and click \"Run\".\n\
@@ -985,8 +932,8 @@ object Main {\n\
 ";
 
 var sqliteSource = "\
--- On Judge0 IDE your SQL script is run on chinook database (https://www.sqlitetutorial.net/sqlite-sample-database).\n\
--- For more information about how to use SQL with Judge0 API please\n\
+-- On Sasi IDE your SQL script is run on chinook database (https://www.sqlitetutorial.net/sqlite-sample-database).\n\
+-- For more information about how to use SQL with Sasi API please\n\
 -- watch this asciicast: https://asciinema.org/a/326975.\n\
 SELECT\n\
     Name, COUNT(*) AS num_albums\n\
@@ -1015,7 +962,7 @@ End Module\n\
 ";
 
 var c3Source = "\
-// On the Judge0 IDE, C3 is automatically\n\
+// On the Sasi IDE, C3 is automatically\n\
 // updated every hour to the latest commit on master branch.\n\
 module main;\n\
 \n\
@@ -1110,7 +1057,7 @@ print(f\"Hello from processor with rank {world_rank} out of {world_size} process
 ";
 
 var nimSource = "\
-# On the Judge0 IDE, Nim is automatically\n\
+# On the Sasi IDE, Nim is automatically\n\
 # updated every day to the latest stable version.\n\
 echo \"hello, world\"\n\
 ";
@@ -1126,7 +1073,7 @@ print(\"hello, world\")\n\
 ";
 
 var bosqueSource = "\
-// On the Judge0 IDE, Bosque (https://github.com/microsoft/BosqueLanguage)\n\
+// On the Sasi IDE, Bosque (https://github.com/microsoft/BosqueLanguage)\n\
 // is automatically updated every hour to the latest commit on master branch.\n\
 \n\
 namespace NSMain;\n\
