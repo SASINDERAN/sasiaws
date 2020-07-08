@@ -1,8 +1,10 @@
-var defaultUrl = localStorageGetItem("api-url") || "https://secure.judge0.com/standard";
+var defaultUrl = "https://judge0.p.rapidapi.com";
 var apiUrl = defaultUrl;
 var wait = localStorageGetItem("wait") || false;
 var pbUrl = "https://pb.judge0.com";
 var check_timeout = 200;
+var rapidapi_host = "judge0.p.rapidapi.com";
+var rapidapi_key = "97b4d20512mshb8c45b8eb82b2a3p1897eajsnc9f00f0b103d";
 
 var blinkStatusLine = ((localStorageGetItem("blink") || "true") === "true");
 var editorMode = localStorageGetItem("editorMode") || "normal";
@@ -393,6 +395,12 @@ function run() {
             type: "POST",
             async: true,
             contentType: "application/json",
+            headers: {
+                "x-rapidapi-host": rapidapi_host,
+                "x-rapidapi-key": rapidapi_key,
+                "content-type": "application/json",
+                "accept": "application/json"
+            },
             data: JSON.stringify(data),
             xhrFields: {
                 withCredentials: apiUrl.indexOf("/secure") != -1 ? true : false
@@ -441,6 +449,10 @@ function fetchSubmission(submission_token) {
         url: apiUrl + "/submissions/" + submission_token + "?base64_encoded=true",
         type: "GET",
         async: true,
+        headers: {
+            "x-rapidapi-host": rapidapi_host,
+            "x-rapidapi-key": rapidapi_key
+        },
         success: function (data, textStatus, jqXHR) {
             if (data.status.id <= 2) { // In Queue or Processing
                 setTimeout(fetchSubmission.bind(null, submission_token), check_timeout);
