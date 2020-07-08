@@ -12,7 +12,9 @@ This code includes:
 * scripts/ - this directory contains scripts used by AWS CodeDeploy when
   installing and deploying the website on the Amazon EC2 instance
 * webpage/ - this directory contains static web assets used by the website
-  * index.html - this file contains the website
+  * index.html - this file contains the website main page
+  * js/ - this directory contains javascript/jquery code used by the website
+  * css/ - this directory contains stylesheets used by the website
 * template.yml - this file contains the description of AWS resources used by AWS
   CloudFormation to deploy the infrastructure
 * template-configuration.json - this file contains the project ARN with placeholders used for tagging resources with the project ID
